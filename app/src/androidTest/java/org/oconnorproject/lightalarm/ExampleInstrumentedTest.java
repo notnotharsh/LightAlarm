@@ -1,4 +1,4 @@
-package org.team1257.lightalarm;
+package org.oconnorproject.lightalarm;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("org.team1257.lightalarm", appContext.getPackageName());
+        assertEquals("org.oconnorproject.lightalarm", appContext.getPackageName());
     }
 }

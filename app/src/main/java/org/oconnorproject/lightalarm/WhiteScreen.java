@@ -1,4 +1,4 @@
-package org.team1257.lightalarm;
+package org.oconnorproject.lightalarm;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
