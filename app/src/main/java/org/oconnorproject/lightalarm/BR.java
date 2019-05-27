@@ -39,7 +39,7 @@ public class BR extends BroadcastReceiver {
             String stringUnmodified = (new BufferedReader(new FileReader(log))).readLine();
             if (stringUnmodified.equals("true")) {
                 Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-                v.vibrate(new long[] {0, 500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500}, 0);
+                v.vibrate(new long[] {0, 500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500}, 1);
             }
         } catch (IOException e) {
             e.printStackTrace();
