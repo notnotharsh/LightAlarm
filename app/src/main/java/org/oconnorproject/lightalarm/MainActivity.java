@@ -19,13 +19,15 @@ public class MainActivity extends AppCompatActivity {
     private AlarmManager alarmManager;
     private Intent intent;
     private PendingIntent pendingIntent;
+    private final long TIME_ZONE_CONST = 14400000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        cancel(findViewById(R.id.cancel));
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         intent = new Intent(this, BR.class);
-        pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 234324243, intent, 0);
+        pendingIntent = PendingIntent.getBroadcast(this.getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         try {
             settings(findViewById(R.id.vibrate));
             settings(findViewById(R.id.rickroll));
@@ -36,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
     public void startAlert(android.view.View view) {
         int hour = Integer.parseInt(((EditText) findViewById(R.id.hour)).getText().toString());
         int minute = Integer.parseInt(((EditText) findViewById(R.id.minute)).getText().toString());
-        long millis = (System.currentTimeMillis() % 86400000 > 3600000 * hour + 60000 * minute) ? 86400000 * ((long) (Math.ceil(System.currentTimeMillis() / 86400000))) + 3600000 * hour + 60000 * minute : 86400000 * ((long) (Math.floor(System.currentTimeMillis() / 86400000))) + 3600000 * hour + 60000 * minute;
+        long nowMillis = System.currentTimeMillis() - TIME_ZONE_CONST;
+        long millis = (nowMillis % 86400000 > 3600000 * hour + 60000 * minute) ? 86400000 * ((long) (Math.ceil(nowMillis / 86400000.0))) + 3600000 * hour + 60000 * minute : 86400000 * ((long) (Math.floor(nowMillis / 86400000.0))) + 3600000 * hour + 60000 * minute + TIME_ZONE_CONST;
         alarmManager.set(AlarmManager.RTC_WAKEUP, millis, pendingIntent);
     }
     public void cancel(android.view.View view) {
