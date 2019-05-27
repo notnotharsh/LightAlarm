@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Environment;
 import android.os.Vibrator;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -39,7 +38,7 @@ public class BR extends BroadcastReceiver {
             String stringUnmodified = (new BufferedReader(new FileReader(log))).readLine();
             if (stringUnmodified.equals("true")) {
                 Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-                v.vibrate(new long[] {0, 500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500}, 1);
+                v.vibrate(new long[] {0, 500, 110, 500, 110, 450, 110, 200, 110, 170, 40, 450, 110, 200, 110, 170, 40, 500}, 0);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -47,6 +46,7 @@ public class BR extends BroadcastReceiver {
         Intent startIntent = new Intent();
         startIntent.setClassName(context, WhiteScreen.class.getName());
         startIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+        intent.putExtra("where","BR");
         context.startActivity(startIntent);
     }
 }

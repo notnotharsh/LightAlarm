@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.Switch;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -40,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         int minute = Integer.parseInt(((EditText) findViewById(R.id.minute)).getText().toString());
         long nowMillis = System.currentTimeMillis() - TIME_ZONE_CONST;
         long millis = (nowMillis % 86400000 > 3600000 * hour + 60000 * minute) ? 86400000 * ((long) (Math.ceil(nowMillis / 86400000.0))) + 3600000 * hour + 60000 * minute : 86400000 * ((long) (Math.floor(nowMillis / 86400000.0))) + 3600000 * hour + 60000 * minute + TIME_ZONE_CONST;
-        alarmManager.set(AlarmManager.RTC_WAKEUP, millis, pendingIntent);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, millis, 60000, pendingIntent);
     }
     public void cancel(android.view.View view) {
         if (alarmManager != null) {
